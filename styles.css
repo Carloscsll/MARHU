@@ -880,3 +880,16 @@ body { font-size: 17px; line-height: 1.5; }
 
 /* Pie */
 .footer__text { font-size: 15px; }
+
+/* Precios bien visibles */
+:root { --price: #ffc46b; }
+.item__price {
+  font-family: var(--font-name); font-weight: 700; font-size: 28px; line-height: 1;
+  color: var(--price); letter-spacing: .01em;
+}
+.item__price--text { font-family: var(--font-body); font-size: 15px; font-weight: 600; color: var(--price); opacity: .9; }
+.item__bottom { margin-top: 12px; }
+.choice .item__price { font-size: 24px; }
+.cart-item__price, .totals__amount { color: var(--price); font-weight: 700; }
+.cart-item__meta { color: var(--muted); }
+.sheet__footer .btn--primary { font-weight: 700; }
