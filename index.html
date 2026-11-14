@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MARHU Sushi Bar · Menú</title>
+  <meta name="description" content="Menú de MARHU Sushi Bar. Arma tu pedido y envíalo por WhatsApp para pasar a recoger o comer en el restaurante.">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta property="og:title" content="MARHU Sushi Bar · Menú">
+  <meta property="og:description" content="Arma tu pedido y envíalo por WhatsApp.">
+  <meta property="og:image" content="img/logo.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Encabezado fijo -->
+  <header class="topbar" id="topbar">
+    <a href="#inicio" class="topbar__logo" aria-label="MARHU Sushi Bar, inicio">
+      <span class="brush brush--sm" aria-hidden="true"></span>
+      <img src="img/logo.png" alt="MARHU Sushi Bar" width="120" height="90">
+    </a>
+    <div class="topbar__actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Buscar en el menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="cart-btn" id="cartOpen" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 7h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 7V6a3 3 0 0 1 6 0v1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span class="cart-btn__label">Mi pedido</span>
+        <span class="cart-btn__count" id="cartCount" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fondo degradado animado -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob-wrap w1"><span class="blob b1"></span></span>
+    <span class="blob-wrap w2"><span class="blob b2"></span></span>
+    <span class="blob-wrap w3"><span class="blob b3"></span></span>
+  </div>
+
+  <!-- Portada -->
+  <section class="hero" id="inicio">
+    <div class="hero__inner">
+      <div class="hero__logo reveal">
+        <span class="brush" aria-hidden="true"></span>
+        <img src="img/logo.png" alt="MARHU Sushi Bar" width="360" height="269">
+      </div>
+      <p class="hero__tag reveal">Sushi · Mariscos · Bar</p>
+      <h1 class="hero__title reveal">Menú</h1>
+      <p class="hero__lead reveal">Elige tus platillos y envíanos tu pedido por WhatsApp. Para comer en el restaurante o pasar a recoger.</p>
+      <div class="hero__cta reveal">
+        <a href="#menu" class="btn btn--primary btn--lg" id="ctaMenu">Ver menú y pedir</a>
+        <a href="#" class="btn btn--glass btn--lg" id="ctaWa" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
+          Escríbenos
+        </a>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marquee"></div></div>
+  </section>
+
+  <!-- Cómo pedir -->
+  <section class="howto" id="howto">
+    <h2 class="howto__title reveal">Cómo pedir</h2>
+    <ol class="howto__list reveal">
+      <li><span class="howto__n">01</span><span><b>Elige del menú</b><small>Agrega platillos y bebidas con el botón +.</small></span></li>
+      <li><span class="howto__n">02</span><span><b>Indica quién recoge</b><small>Nombre completo y si comes aquí o pasas por él.</small></span></li>
+      <li><span class="howto__n">03</span><span><b>Envía por WhatsApp</b><small>Tu pedido llega listo al chat del restaurante.</small></span></li>
+    </ol>
+    <p class="howto__note reveal">Sin servicio a domicilio.</p>
+  </section>
+
+  <!-- Navegación de secciones -->
+  <nav class="catnav" id="catnav" aria-label="Secciones del menú">
+    <div class="catnav__search" id="searchBar" hidden>
+      <input type="search" id="searchInput" placeholder="Buscar platillo o bebida…" autocomplete="off" aria-label="Buscar platillo o bebida">
+      <button class="icon-btn" id="searchClose" aria-label="Cerrar búsqueda">✕</button>
+    </div>
+    <div class="catnav__main" id="mainTabs" role="tablist"></div>
+    <div class="catnav__sub" id="subTabs"></div>
+  </nav>
+
+  <main id="menu" class="menu"></main>
+  <p class="empty-search" id="emptySearch" hidden>No encontramos nada con esa búsqueda.</p>
+
+  <footer class="footer">
+    <svg class="torii" viewBox="0 0 360 200" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+        <path d="M14 34 Q180 6 346 34 L340 48 Q180 24 20 48 Z"/>
+        <path d="M40 56 H320 V68 H40 Z"/>
+        <path d="M168 48 h24 v8 h-24 z"/>
+        <path d="M86 48 V200 M104 48 V200 M256 48 V200 M274 48 V200"/>
+        <path d="M60 92 H300 V104 H60 Z"/>
+        <path d="M80 190 h30 v10 h-30z M250 190 h30 v10 h-30z"/>
+      </g>
+    </svg>
+    <div class="waves" aria-hidden="true"></div>
+    <div class="footer__text">
+      <img src="img/logo.png" alt="" width="120" height="90">
+      <p>Pedidos por WhatsApp · Para comer aquí o pasar a recoger</p>
+      <p class="muted">Precios en pesos mexicanos. Sujetos a cambio sin previo aviso.</p>
+    </div>
+  </footer>
+
+  <!-- Barra flotante (móvil) -->
+  <button class="floatbar" id="floatbar" hidden>
+    <span class="floatbar__count" id="floatCount">0</span>
+    <span>Ver mi pedido</span>
+    <span class="floatbar__total" id="floatTotal">$0</span>
+  </button>
+
+  <!-- Hoja de platillo -->
+  <div class="overlay" id="itemOverlay" hidden></div>
+  <section class="sheet" id="itemSheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <button class="sheet__close icon-btn" data-close="item" aria-label="Cerrar">✕</button>
+    <div class="sheet__media" id="sheetMedia"></div>
+    <div class="sheet__body">
+      <h2 class="sheet__title" id="sheetTitle"></h2>
+      <div class="sheet__tags" id="sheetTags"></div>
+      <p class="sheet__desc" id="sheetDesc"></p>
+      <fieldset class="choices" id="sheetChoices" hidden>
+        <legend id="sheetChoicesLabel">Elige una opción</legend>
+        <div class="choices__list" id="sheetChoicesList"></div>
+      </fieldset>
+      <label class="field">
+        <span class="field__label">Instrucciones especiales <em>(opcional)</em></span>
+        <textarea id="sheetNote" rows="2" maxlength="140" placeholder="Ej. sin cebolla, salsa aparte…"></textarea>
+      </label>
+    </div>
+    <div class="sheet__footer">
+      <div class="stepper" aria-label="Cantidad">
+        <button type="button" id="sheetMinus" aria-label="Quitar uno">−</button>
+        <output id="sheetQty">1</output>
+        <button type="button" id="sheetPlus" aria-label="Agregar uno">+</button>
+      </div>
+      <button class="btn btn--primary btn--grow" id="sheetAdd">Agregar</button>
+    </div>
+  </section>
+
+  <!-- Carrito / pedido -->
+  <div class="overlay" id="cartOverlay" hidden></div>
+  <aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+    <header class="drawer__head">
+      <button class="icon-btn" id="drawerBack" aria-label="Regresar" hidden>←</button>
+      <h2 id="drawerTitle">Mi pedido</h2>
+      <button class="icon-btn" data-close="cart" aria-label="Cerrar">✕</button>
+    </header>
+    <ol class="steps" aria-label="Pasos">
+      <li data-step="1" class="is-active">Pedido</li>
+      <li data-step="2">Tus datos</li>
+      <li data-step="3">Confirmar</li>
+    </ol>
+
+    <!-- Paso 1: carrito -->
+    <div class="drawer__panel" data-panel="1">
+      <div class="cart-empty" id="cartEmpty">
+        <p class="cart-empty__title">Tu pedido está vacío</p>
+        <p class="muted">Agrega platillos o bebidas del menú.</p>
+        <button class="btn btn--ghost" data-close="cart">Ver el menú</button>
+      </div>
+      <ul class="cart-list" id="cartList"></ul>
+    </div>
+
+    <!-- Paso 2: datos -->
+    <form class="drawer__panel" data-panel="2" id="orderForm" novalidate hidden>
+      <div class="notice">
+        <strong>Sin servicio a domicilio.</strong> Tu pedido es para pasar a recoger o para comer en el restaurante.
+      </div>
+      <label class="field">
+        <span class="field__label">Nombre completo de quien recoge *</span>
+        <input type="text" id="custName" name="nombre" autocomplete="name" maxlength="60" placeholder="Ej. María López García" required>
+        <span class="field__error" id="nameError" hidden>Escribe el nombre completo (nombre y apellido).</span>
+      </label>
+
+      <fieldset class="field">
+        <legend class="field__label">¿Cómo será tu pedido? *</legend>
+        <div class="mode">
+          <label class="mode__opt">
+            <input type="radio" name="modo" value="recoger" checked>
+            <span><b>Paso a recoger</b><small>Lo preparamos y pasas por él</small></span>
+          </label>
+          <label class="mode__opt">
+            <input type="radio" name="modo" value="aqui">
+            <span><b>Comer aquí</b><small>En el restaurante</small></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="field" id="pickupFields">
+        <span class="field__label">¿A qué hora pasas?</span>
+        <div class="row">
+          <select id="pickupWhen" aria-label="Momento de recogida">
+            <option value="asap">Lo antes posible</option>
+            <option value="hora">A una hora específica</option>
+          </select>
+          <input type="time" id="pickupTime" aria-label="Hora para recoger" hidden>
+        </div>
+      </div>
+
+      <label class="field" id="dineFields" hidden>
+        <span class="field__label">¿Para cuántas personas?</span>
+        <input type="number" id="people" min="1" max="40" inputmode="numeric" placeholder="Ej. 2">
+      </label>
+
+      <label class="field">
+        <span class="field__label">Comentarios <em>(opcional)</em></span>
+        <textarea id="comments" rows="2" maxlength="240" placeholder="Algo que debamos saber…"></textarea>
+      </label>
+    </form>
+
+    <!-- Paso 3: confirmar -->
+    <div class="drawer__panel" data-panel="3" hidden>
+      <p class="muted small">Así se enviará tu mensaje por WhatsApp. Revisa que todo esté bien:</p>
+      <div class="wa-preview">
+        <div class="wa-preview__bubble" id="waPreview"></div>
+      </div>
+      <p class="config-warning" id="configWarning" hidden>
+        ⚠️ Falta configurar el número de WhatsApp del negocio en <code>menu-data.js</code>.
+      </p>
+      <div class="sent" id="sentBox" hidden>
+        <p><b>¡Listo!</b> Se abrió WhatsApp con tu pedido. Solo presiona <b>Enviar</b>.</p>
+        <button class="btn btn--ghost" id="newOrder">Empezar un pedido nuevo</button>
+      </div>
+    </div>
+
+    <footer class="drawer__foot" id="drawerFoot">
+      <div class="totals">
+        <span>Total</span>
+        <span class="totals__amount" id="cartTotal">$0</span>
+      </div>
+      <p class="totals__note" id="totalNote" hidden>+ artículos con precio por confirmar</p>
+      <button class="btn btn--primary btn--block" id="nextBtn">Continuar</button>
+    </footer>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="menu-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
