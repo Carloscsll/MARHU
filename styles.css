@@ -920,3 +920,26 @@ body { font-size: 17px; line-height: 1.5; }
 @media (min-width: 720px) { .item__row .item__name { font-size: 21px; } }
 .cart-btn { white-space: nowrap; }
 @media (max-width: 350px) { .cart-btn__label { display: none; } .topbar__logo { width: 76px; } }
+
+/* Más aire y botón compacto */
+.group { padding: 22px 20px 6px; }
+.item { padding: 20px 0; }
+.item__row { gap: 14px; }
+.item__row .item__name { line-height: 1.2; }
+.item__more { margin-top: 10px; }
+.item__desc { line-height: 1.5; }
+.item__add {
+  height: 38px; padding: 0 12px; border-radius: 8px;
+  font-size: 14.5px; font-weight: 600; gap: 3px;
+}
+.item__add span { font-size: 18px; }
+.qty { height: 38px; border-width: 1.5px; border-radius: 8px; }
+.qty__btn { width: 36px; font-size: 21px; }
+.qty__n { min-width: 22px; font-size: 17px; }
+.item__row .item__price { font-size: 24px; }
+@media (max-width: 380px) {
+  .group { padding: 20px 16px 4px; }
+  .item__row { gap: 10px; }
+  .item__add { padding: 0 10px; font-size: 14px; }
+  .qty__btn { width: 34px; }
+}
