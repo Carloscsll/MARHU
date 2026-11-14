@@ -87,14 +87,13 @@
       <div class="item" data-id="${it.id}" data-search="${esc(norm(it.n + " " + (it.d || "") + " " + it.grupo + " " + (it.o || []).join(" ")))}" tabindex="0" role="button" aria-label="${esc(it.n)}">
         ${thumb}
         <div class="item__main">
-          <div class="item__top">
-            <span class="item__name">${esc(it.n)} ${tagsHtml(it.t)}</span>
-            <span class="item__dots" aria-hidden="true"></span>
-            ${price}
-          </div>
+          <div class="item__name">${esc(it.n)} ${tagsHtml(it.t)}</div>
           ${desc ? `<p class="item__desc">${esc(desc)}</p>` : ""}
+          <div class="item__bottom">
+            ${price}
+            <div class="item__ctrl" data-ctrl="${it.id}"></div>
+          </div>
         </div>
-        <div class="item__ctrl" data-ctrl="${it.id}"></div>
       </div>`;
   }
 
@@ -152,6 +151,14 @@
     renderRowControls();
   }
 
+  const TRASH = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function qtyHtml(q, decAttr, incAttr, name) {
+    return `<div class="qty" role="group" aria-label="Cantidad de ${esc(name)}">
+      <button class="qty__btn ${q === 1 ? "qty__btn--del" : ""}" ${decAttr} aria-label="${q === 1 ? "Quitar " + esc(name) + " del pedido" : "Quitar uno"}">${q === 1 ? TRASH : "−"}</button>
+      <span class="qty__n" aria-live="polite">${q}</span>
+      <button class="qty__btn" ${incAttr} aria-label="Agregar uno más">+</button>
+    </div>`;
+  }
   function renderRowControls() {
     $$("[data-ctrl]").forEach((el) => {
       const id = el.dataset.ctrl, it = ITEMS[id], q = qtyForItem(id);
@@ -159,9 +166,10 @@
       const lines = cart.filter((l) => l.id === id);
       // Stepper solo si el platillo no tiene opciones y está en una sola línea sin nota
       if (q > 0 && simple && lines.length === 1) {
-        el.innerHTML = `<div class="item__qty"><button data-dec="${id}" aria-label="Quitar uno de ${esc(it.n)}">−</button><span>${q}</span><button data-inc="${id}" aria-label="Agregar otro ${esc(it.n)}">+</button></div>`;
+        el.innerHTML = qtyHtml(q, `data-dec="${id}"`, `data-inc="${id}"`, it.n);
       } else {
-        el.innerHTML = `<button class="item__add" data-add="${id}" aria-label="Agregar ${esc(it.n)}">${q > 0 ? `<small style="font-size:13px;font-weight:700">${q}</small>` : "+"}</button>`;
+        el.innerHTML = (q > 0 ? `<span class="item__incart">✓ Llevas ${q}</span>` : "") +
+          `<button class="item__add" data-add="${id}" aria-label="Agregar ${esc(it.n)}"><span aria-hidden="true">+</span> ${q > 0 ? "Otro" : "Agregar"}</button>`;
       }
     });
   }
@@ -310,11 +318,7 @@
         </div>
         <div class="cart-item__side">
           <span class="cart-item__price">${typeof l.price === "number" ? money(l.price * l.qty) : "—"}</span>
-          <div class="item__qty">
-            <button data-line-dec="${i}" aria-label="${l.qty === 1 ? "Eliminar" : "Quitar uno"}">${l.qty === 1 ? '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="margin:auto;display:block"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>' : "−"}</button>
-            <span>${l.qty}</span>
-            <button data-line-inc="${i}" aria-label="Agregar uno">+</button>
-          </div>
+          ${qtyHtml(l.qty, `data-line-dec="${i}"`, `data-line-inc="${i}"`, l.name)}
         </div>
       </li>`).join("");
     $("#cartTotal").textContent = money(total);
@@ -515,15 +519,14 @@
   /* ---------- Portada: fotos en movimiento, botones, parallax ---------- */
   function buildMarquee() {
     const pics = [];
-    Object.values(ITEMS).forEach((it) => { if (it.img) pics.push({ src: it.img, n: it.n }); });
+    Object.values(ITEMS).forEach((it) => { if (it.img) pics.push({ src: it.img, n: it.n, id: it.id }); });
     MENU.forEach((s) => s.grupos.forEach((g) => { if (g.foto) pics.push({ src: g.foto, n: "Nigiri" }); }));
     // intercala platillos y cócteles
     const food = pics.filter((p) => !isPng(p.src) || /aguachile/.test(p.src));
     const drinks = pics.filter((p) => isPng(p.src) && !/aguachile/.test(p.src));
     const mixed = [];
     for (let i = 0; i < Math.max(food.length, drinks.length); i++) { if (food[i]) mixed.push(food[i]); if (drinks[i]) mixed.push(drinks[i]); }
-    const html = mixed.map((p) => `<div class="mq ${isPng(p.src) && !/aguachile/.test(p.src) ? "mq--png" : ""}"><img src="${p.src}" alt="" loading="lazy"><span>${esc(p.n)}</span></div>`).join("");
-    $("#marquee").innerHTML = html + html; // duplicado para un ciclo continuo
+    $("#marquee").innerHTML = mixed.map((p) => `<button class="mq ${isPng(p.src) && !/aguachile/.test(p.src) ? "mq--png" : ""}" ${p.id ? `data-open="${p.id}"` : ""} aria-label="Ver ${esc(p.n)}"><img src="${p.src}" alt="" decoding="async"><span>${esc(p.n)}</span></button>`).join("");
   }
   const phone = validPhone();
   if (phone) $("#ctaWa").href = `https://wa.me/${phone}?text=${encodeURIComponent(`¡Hola, ${CONFIG.nombre || "MARHU Sushi Bar"}! 👋 Quisiera información.`)}`;
@@ -540,7 +543,7 @@
   function setupReveal() {
     $$(".section__title, .legend, .group").forEach((el) => el.classList.add("reveal"));
     let pending = $$(".reveal");
-    if (reduceMotion) { pending.forEach((el) => el.classList.add("in")); return; }
+    /* contenido siempre visible (más confiable en cualquier celular) */ if (true) { pending.forEach((el) => el.classList.add("in")); return; }
     const check = () => {
       if (!pending.length) return;
       const limit = window.innerHeight * 0.95;

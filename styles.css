@@ -735,3 +735,148 @@ body { font-size: 15px; letter-spacing: 0; }
 .notice { border-radius: 10px; background: rgba(232,50,42,.08); border-color: rgba(232,50,42,.35); }
 .pill { display: none; }
 .photo-card .photo-label { max-width: calc(100% - 20px); line-height: 1.25; text-align: right; }
+
+/* =========================================================
+   Legibilidad y facilidad de uso (para todas las edades)
+   ========================================================= */
+:root { --muted: #d6ccc7; }
+body { font-size: 17px; line-height: 1.5; }
+
+/* Contenido siempre visible, sin saltos */
+.reveal, .reveal.in { opacity: 1 !important; transform: none !important; transition: none !important; }
+.hero__inner { transform: none !important; opacity: 1 !important; }
+
+/* Portada */
+.hero__tag { font-size: 14px; letter-spacing: .24em; padding-left: .24em; color: #e6dcd7; }
+.hero__lead { font-size: 17px; color: #e6dcd7; max-width: 30ch; }
+.btn--lg { height: 56px; font-size: 17px; }
+.hero__cta { flex-direction: column; align-items: stretch; max-width: 340px; margin-left: auto; margin-right: auto; }
+@media (min-width: 720px) { .hero__cta { flex-direction: row; max-width: none; justify-content: center; } }
+
+/* Carrusel de fotos: se desliza con el dedo, sin animación automática */
+.marquee { margin-top: 28px; -webkit-mask: none; mask: none; }
+.marquee__track {
+  animation: none !important; width: auto; display: flex; gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding: 0 var(--gutter) 6px; scrollbar-width: none;
+}
+.marquee__track::-webkit-scrollbar { display: none; }
+.mq, .mq:nth-child(odd), .mq:nth-child(even) {
+  width: 62vw; max-width: 240px; height: auto; aspect-ratio: 4 / 5;
+  scroll-snap-align: center; border-radius: 10px; cursor: pointer; padding: 0;
+}
+.mq span { font-size: 16px; font-weight: 600; padding: 34px 12px 12px; }
+.marquee__hint { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+
+/* Cómo pedir */
+.howto__title { font-size: 15px; }
+.howto__list b { font-size: 18px; }
+.howto__list small { font-size: 16px; }
+.howto__note { font-size: 15px; }
+
+/* Navegación */
+.maintab { font-size: 16px; padding: 10px 12px 12px; letter-spacing: .14em; }
+.chip { height: 42px; padding: 0 16px; font-size: 15px; font-weight: 500; color: #e6dcd7; border-color: rgba(255,255,255,.3); }
+.icon-btn { width: 46px; height: 46px; }
+.cart-btn { height: 46px; font-size: 16px; padding: 0 16px; }
+.cart-btn__count { min-width: 26px; height: 26px; font-size: 14px; }
+@media (max-width: 420px) { .cart-btn__label { display: inline; } .cart-btn { padding: 0 12px; } }
+
+/* Títulos */
+.group__title { font-size: 23px; letter-spacing: .14em; }
+.group__unit, .group__sub { font-size: 13px; }
+.group__note { font-size: 15px; color: var(--muted); }
+.legend { font-size: 14px; color: #e6dcd7; }
+
+/* Platillos: nombre, descripción y abajo precio + botón grande */
+.item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; }
+.item__thumb { width: 76px; height: 76px; margin-top: 2px; }
+.item__name { font-size: 22px; line-height: 1.15; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.item__desc { font-size: 15.5px; line-height: 1.45; color: var(--muted); margin-top: 4px; }
+.item__bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.item__price { font-size: 24px; font-weight: 600; color: #fff; }
+.item__price--text { font-size: 15px; font-weight: 500; color: var(--muted); }
+.item__ctrl { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.item__add {
+  width: auto; height: 48px; padding: 0 18px; border-radius: 10px;
+  background: var(--red); border: 0; color: #fff;
+  font-family: var(--font-body); font-size: 17px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.item__add span { font-size: 22px; line-height: 1; font-weight: 500; }
+.item__add:hover { background: #d42a22; }
+.item__incart { font-size: 15px; font-weight: 600; color: #7ee2a0; }
+.tag-ico { width: 20px; height: 20px; }
+
+/* Contador − / + */
+.qty {
+  display: inline-flex; align-items: center; height: 48px;
+  border: 2px solid var(--red); border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.25);
+}
+.qty__btn {
+  width: 48px; height: 100%; display: grid; place-items: center;
+  font-size: 26px; line-height: 1; color: #fff; font-weight: 500;
+}
+.qty__btn:hover { background: rgba(255,255,255,.08); }
+.qty__btn:active { background: rgba(255,255,255,.16); }
+.qty__btn--del { color: #ff8a80; }
+.qty__n { min-width: 34px; text-align: center; font-size: 20px; font-weight: 700; }
+
+/* Foto de sección */
+.photo-label { font-size: 13px; }
+.photo-card .photo-label { font-size: 12.5px; }
+.drink { width: 116px; }
+.drink .photo-label { font-size: 12px; }
+
+/* Barra flotante */
+.floatbar { height: 62px; font-size: 18px; }
+.floatbar__count { min-width: 32px; height: 32px; font-size: 16px; }
+.floatbar__total { font-size: 26px; }
+
+/* Ventana de platillo */
+.sheet__title { font-size: 32px; }
+.sheet__desc { font-size: 17px; color: var(--muted); }
+.sheet__tags { font-size: 14px; }
+.choices legend { font-size: 17px; }
+.choice { padding: 16px; }
+.choice b { font-size: 18px; }
+.choice input { width: 24px; height: 24px; }
+.sheet__footer .stepper { height: 56px; border: 2px solid var(--line-2); border-radius: 10px; }
+.sheet__footer .stepper button { width: 52px; height: 52px; font-size: 28px; }
+.sheet__footer .stepper output { font-size: 22px; min-width: 32px; }
+.sheet__footer .btn { height: 56px; font-size: 17px; }
+.sheet__close { width: 48px; height: 48px; font-size: 22px; }
+
+/* Carrito */
+.drawer__head h2 { font-size: 22px; }
+.drawer__head .icon-btn { font-size: 24px; }
+.steps li { font-size: 14px; }
+.cart-item { flex-direction: column; gap: 10px; padding: 16px 0; }
+.cart-item__name { font-size: 22px; }
+.cart-item__meta { font-size: 15.5px; }
+.cart-item__note { font-size: 15px; }
+.cart-item__side { flex-direction: row; justify-content: space-between; align-items: center; width: 100%; }
+.cart-item__price { font-size: 24px; font-weight: 600; }
+.totals span:first-child { font-size: 18px; }
+.totals__amount { font-size: 32px; }
+.totals__note { font-size: 14px; }
+.drawer__foot .btn { height: 58px; font-size: 18px; }
+.cart-empty__title { font-size: 26px; }
+
+/* Formulario */
+.field__label { font-size: 16px; }
+.field input, .field textarea, .field select { font-size: 18px; padding: 14px 16px; min-height: 54px; }
+.field__error { font-size: 15px; }
+.mode__opt span { padding: 16px; }
+.mode__opt b { font-size: 17px; }
+.mode__opt small { font-size: 14px; }
+.notice { font-size: 15.5px; }
+.wa-preview__bubble { font-size: 16px; }
+.muted.small { font-size: 15px; }
+.sent { font-size: 16px; }
+
+/* Aviso emergente */
+.toast { font-size: 16px; padding: 12px 20px; bottom: calc(92px + env(safe-area-inset-bottom)); }
+
+/* Pie */
+.footer__text { font-size: 15px; }
