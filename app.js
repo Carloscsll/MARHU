@@ -76,24 +76,22 @@
   const menuEl = $("#menu");
 
   function itemRow(it) {
+    const minV = it.v ? Math.min(...it.v.map((v) => v[1])) : null;
     const price = it.v
-      ? `<span class="item__price">${it.v.map((v) => money(v[1])).join(" / ")}</span>`
+      ? `<span class="item__price"><small>desde</small>${money(minV)}</span>`
       : typeof it.p === "number"
         ? `<span class="item__price">${money(it.p)}</span>`
         : `<span class="item__price item__price--text">${esc(it.pt || "Consultar")}</span>`;
-    const desc = [it.d, it.v ? it.v.map((v) => v[0]).join(" / ") : ""].filter(Boolean).join(" · ");
+    const desc = [it.d, it.v ? it.v.map((v) => `${v[0]} ${money(v[1])}`).join(" · ") : ""].filter(Boolean).join(" · ");
     const thumb = it.img ? `<div class="item__thumb ${isPng(it.img) ? "item__thumb--png" : ""}"><img src="${it.img}" alt="" loading="lazy"></div>` : "";
     return `
       <div class="item" data-id="${it.id}" data-search="${esc(norm(it.n + " " + (it.d || "") + " " + it.grupo + " " + (it.o || []).join(" ")))}" tabindex="0" role="button" aria-label="${esc(it.n)}">
-        ${thumb}
-        <div class="item__main">
+        <div class="item__row">
           <div class="item__name">${esc(it.n)} ${tagsHtml(it.t)}</div>
-          ${desc ? `<p class="item__desc">${esc(desc)}</p>` : ""}
-          <div class="item__bottom">
-            ${price}
-            <div class="item__ctrl" data-ctrl="${it.id}"></div>
-          </div>
+          ${price}
+          <div class="item__ctrl" data-ctrl="${it.id}"></div>
         </div>
+        ${thumb || desc ? `<div class="item__more">${thumb}${desc ? `<p class="item__desc">${esc(desc)}</p>` : ""}</div>` : ""}
       </div>`;
   }
 
